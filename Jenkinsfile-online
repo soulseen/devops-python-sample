@@ -46,6 +46,13 @@ pipeline {
 
       }
     }
+    
+    stage('deploy to dev') {
+          steps {
+            input(id: 'deploy-to-dev', message: 'deploy to dev?')
+            sh 'echo ss'
+          }
+        }
 
     stage('推送镜像') {
       steps {
