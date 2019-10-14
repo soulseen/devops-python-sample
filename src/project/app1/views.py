@@ -8,5 +8,5 @@ from django.http import HttpResponse
 
 def home(request):
     resp = HttpResponse()
-    resp.write("<h1 style='text-align:center;'>Hello, Django!</h1>")
+    resp.write("<h1 style='text-align:center;'>Hello, Djangoaaaa</h1>")
     return resp
