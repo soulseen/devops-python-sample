@@ -8,7 +8,7 @@ pipeline {
     DOCKER_CREDENTIAL_ID = 'dockerhub'
     KUBECONFIG_CREDENTIAL_ID = 'kubeconfig'
     REGISTRY = 'docker.io'
-    DOCKERHUB_NAMESPACE = 'shaowenchen'
+    DOCKERHUB_NAMESPACE = 'zhuxiaoyang'
     APP_NAME = 'devops-python-sample'
     SONAR_CREDENTIAL_ID = 'sonar-token'
   }
@@ -26,27 +26,6 @@ pipeline {
       }
     }
 
-    stage('代码检查') {
-      steps {
-        container('base') {
-          withCredentials([string(credentialsId : "$SONAR_CREDENTIAL_ID" ,variable : 'SONAR_TOKEN' ,)]) {
-            withSonarQubeEnv('sonar') {
-              sh '''pip install pkgs/base/* & pip install pkgs/extra/*
-  coverage erase
-  cd ./src/
-  coverage run --source='.' manage.py test
-  coverage xml -i
-  '''
-              sh "sonar-scanner -Dsonar.branch=$BRANCH_NAME -Dsonar.login=$SONAR_TOKEN"
-            }
-
-          }
-
-        }
-
-      }
-    }
-
     stage('推送镜像') {
       steps {
         container('base') {
@@ -58,12 +37,6 @@ pipeline {
 
         }
 
-      }
-    }
-
-    stage('部署') {
-      steps {
-        kubernetesDeploy(enableConfigSubstitution: true, kubeconfigId: "$KUBECONFIG_CREDENTIAL_ID", configs: 'deploy/**')
       }
     }
   
