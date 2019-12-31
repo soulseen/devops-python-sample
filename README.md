@@ -39,3 +39,4 @@
 通过集群外部访问 IP + NodePort 端口，就可以访问到 Django 提供的页面。
 aaa
 b
+b3
