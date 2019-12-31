@@ -37,4 +37,4 @@
 6. 在 django-proj 项目中，找到 django-demo 服务，可以查看到相关的访问 NodePort 端口。
 
 通过集群外部访问 IP + NodePort 端口，就可以访问到 Django 提供的页面。
-aa
+aaa
